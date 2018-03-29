@@ -1,0 +1,13 @@
+---
+- name: add keypair
+  os_keypair:
+    auth:
+      auth_url: "{{ identity_api }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project_name }}"
+      project_domain_name: "{{ project_domain }}"
+      user_domain_name: "{{ user_domain }}"
+    state: present
+    name: test
+    public_key_file: /home/ubuntu/.ssh/id_rsa.pub

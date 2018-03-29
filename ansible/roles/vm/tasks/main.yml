@@ -1,0 +1,32 @@
+- name: create instance
+  os_server:
+    auth:
+      auth_url: "{{ identity_api }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project_name }}"
+      project_domain_name: "{{ project_domain }}"
+      user_domain_name: "{{ user_domain }}"
+    state: present
+    key_name: "{{ item.key_name }}"
+    flavor: "{{ item.flavor }}"
+    network: "{{ item.network }}"
+    image: "{{ item.image }}"
+    name: "{{ item.name }}"
+    security_groups: "{{ item.sg }}"
+    validate_certs: false
+  with_items:
+    - "{{ vm }}"
+
+- name: add floating ip
+  os_floating_ip:
+   auth:
+      auth_url: "{{ identity_api }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project_name }}"
+      project_domain_name: "{{ project_domain }}"
+      user_domain_name: "{{ user_domain }}"
+   server: "{{ item.name }}"
+  with_items:
+    - "{{ vm }}"   

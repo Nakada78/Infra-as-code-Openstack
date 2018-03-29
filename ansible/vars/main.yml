@@ -1,0 +1,22 @@
+identity_api: http://172.16.180.250/identity/v3 
+username: admin
+password: root
+project_name: alt_demo
+project_domain: default
+user_domain: Default
+
+vm:
+  - name: test-1
+    key_name: test
+    flavor: m1.nano
+    network: reseau-test
+    image: cirros-4
+    sg: my_group
+
+vm:
+  - name: test-2
+    key_name: test
+    flavor: m1.nano
+    network: reseau-test
+    image: cirros-4
+    sg: my_group

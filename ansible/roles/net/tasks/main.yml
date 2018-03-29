@@ -1,0 +1,39 @@
+---
+- name: create subnet
+  os_network:
+    auth:
+      auth_url: "{{ identity_api }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project_name }}"
+      project_domain_name: "{{ project_domain }}"
+      user_domain_name: "{{ user_domain }}"
+    state: present
+    name: reseau-test
+
+- os_subnet:
+    auth:
+      auth_url: "{{ identity_api }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project_name }}"
+      project_domain_name: "{{ project_domain }}"
+      user_domain_name: "{{ user_domain }}"
+    state: present
+    network_name: reseau-test
+    name: subnet-test
+    cidr: 192.168.0.0/24
+
+- os_router:
+    auth:
+      auth_url: "{{ identity_api }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project_name }}"
+      project_domain_name: "{{ project_domain }}"
+      user_domain_name: "{{ user_domain }}"
+    state: present
+    name: router-test
+    network: RESEAUPUB
+    interfaces:
+      - subnet-test

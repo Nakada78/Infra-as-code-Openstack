@@ -1,0 +1,53 @@
+---
+- os_security_group:
+    auth:
+      auth_url: "{{ identity_api }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project_name }}"
+      project_domain_name: "{{ project_domain }}"
+      user_domain_name: "{{ user_domain }}"
+    state: present
+    name: "my_group"
+    description: security group for my_group servers
+
+
+- os_security_group_rule:
+    auth:
+      auth_url: "{{ identity_api }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project_name }}"
+      project_domain_name: "{{ project_domain }}"
+      user_domain_name: "{{ user_domain }}"
+    security_group: "my_group"
+    protocol: tcp
+    port_range_min: 80
+    port_range_max: 80
+    remote_ip_prefix: 0.0.0.0/0
+
+- os_security_group_rule:
+    auth:
+      auth_url: "{{ identity_api }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project_name }}"
+      project_domain_name: "{{ project_domain }}"
+      user_domain_name: "{{ user_domain }}"
+    security_group: "my_group"
+    protocol: icmp
+    remote_ip_prefix: 0.0.0.0/0
+
+- os_security_group_rule:
+    auth:
+      auth_url: "{{ identity_api }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      project_name: "{{ project_name }}"
+      project_domain_name: "{{ project_domain }}"
+      user_domain_name: "{{ user_domain }}"
+    security_group: "my_group"
+    protocol: tcp
+    port_range_min: 22
+    port_range_max: 22
+    remote_ip_prefix: 0.0.0.0/0
